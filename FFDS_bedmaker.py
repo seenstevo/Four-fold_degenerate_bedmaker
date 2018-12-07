@@ -31,7 +31,7 @@ def codon_flavour_bed_maker (fasta):
     old_x = 0
     old_header = ""
     for seq_record in SeqIO.parse(fasta, "fasta"):
-        header_s = seq_record.name.split("_")
+        header_s = seq_record.name.split("::")[0]("_")
         seq = str(seq_record.seq)
         Chr = header_s[1]
         strand = header_s[3]
