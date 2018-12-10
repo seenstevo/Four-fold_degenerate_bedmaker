@@ -10,7 +10,7 @@ Created on Tue Aug  8 18:24:00 2017
 Codons are scanned and compared to the list of four-fold degenerate codon list. 
 Matches are reported in bed format which point to the third position only but which also reports the full codon it is found in.
 To generate the nessesary fasta file you can run:
-grep CDS genes.gff | awk '{OFS="\t"; split($9, a, "="); split(a[2], b, "."); print $1, ($4-1), $5,b[1]"."b[2]"_"$1"_"$4}' \
+awk '($3=="CDS") {print}' genes.gff | awk '{OFS="\t"; split($9, a, "="); split(a[2], b, "."); print $1, ($4-1), $5,b[1]"."b[2]"_"$1"_"$4}' \
 | sort -k1,1 -k4,4 | bedtools getfasta -name -fi genome.fa -bed - -fo CDS.fasta
 Note, the splitting may not work for all gff file formats depending on how the column of locus IDs is structured.
 To run this script on command line use:
